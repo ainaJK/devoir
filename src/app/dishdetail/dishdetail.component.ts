@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DishService } from '../services/services/dish.service';
+import {Dish } from '../shared/dish';
 
+import { Params, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 const DISH = {
   id: '0',
   name: 'Uthappizza',
-  image: '../../assets/images/uthappizza.png',
+  image: '../assets/images/uthappizza.png',
   category: 'mains',
   featured: true,
   label: 'Hot',
@@ -45,17 +49,34 @@ const DISH = {
    ]
 };
 
+
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
   styleUrls: ['./dishdetail.component.scss']
 })
-export class DishdetailComponent implements OnInit {
-  dish= DISH;
-  selectedDish=DISH;
-  constructor() { }
+export class DishdetailComponent implements OnInit {   
+  
+    dish= DISH;
+
+
+
+  
+  
+
+  constructor( private dishservice: DishService,
+    private route : ActivatedRoute,
+    private location: Location ) { }
 
   ngOnInit(): void {
+    let id = this.route.snapshot.params['id'];
+    this.dish = this.dishservice.getDish(id);
+
   }
+  goBack(): void {
+    this.location.back();
+  }
+
+
 
 }
