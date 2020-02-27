@@ -6,10 +6,10 @@ import { Leader } from 'src/app/shared/leader';
   providedIn: 'root'
 })
 export class LeaderService {
-  getDishes(): Leader[] {
+  getLeaders(): Leader[] {
     return LEADERS;
   }
-  getDish(id: string) : Leader{
+  getLeader(id: string) : Leader{
     return LEADERS.filter((leader)=> (leader.id === id))[0];
   }
   getFeaturedLeader() : Leader{
